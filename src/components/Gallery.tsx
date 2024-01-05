@@ -3,7 +3,7 @@ import { urlFor } from "@/lib/sanity";
 import Image from "next/image";
 import { useState } from "react";
 const Gallery = ({ image }: any) => {
-  console.log(image);
+  // console.log(image);
   const [Bimage, setBimage] = useState(image[0]);
   return (
     <div className="grid lg:grid-cols-5 gap-4 ">

@@ -11,15 +11,17 @@ export const MyContext = createContext();
 const CartContext = ({ children }: { children: any }) => {
   const [cartProducts, setCartProducts] = useState<productDetail[]>([]);
   const [open, setOpen] = useState(false);
-  console.log(cartProducts);
+  const [total, setTotal] = useState(0);
 
-  //   useEffect(() => {
-  //     localStorage.setItem("cart", JSON.stringify(cartProducts));
-  //   }, [cartProducts]);
+  useEffect(() => {
+    setTotal(
+      cartProducts.reduce((acc, item) => acc + item.quantity * item.Price, 0)
+    );
+  }, [cartProducts]);
 
   const addToCart = (pro: productDetail) => {
     let check = cartProducts.some((product) => product.slug === pro.slug);
-    console.log(check);
+
     if (check === true) {
       setCartProducts([
         ...cartProducts.map(
@@ -57,6 +59,7 @@ const CartContext = ({ children }: { children: any }) => {
         ClearCart,
         removeFrCart,
         cartProducts,
+        total,
       }}
     >
       {children}
