@@ -2,21 +2,31 @@
 
 import getStripe from "@/lib/stripe";
 import { Button } from "./ui/button";
+import { redirect, useRouter } from "next/navigation";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const Checkout = ({ products }) => {
+  const { isAuthenticated } = useKindeBrowserClient();
+  const router = useRouter();
   const handleCheckout = async () => {
-    const stripe = await getStripe();
+    if (!isAuthenticated) {
+      router.push("/api/auth/login");
+      return false;
+    } else {
+      const stripe = await getStripe();
 
-    const response = await fetch("http://localhost:3000/api/stripe-session", {
-      method: "POST",
-      cache: "no-store",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(products),
-    });
-    const data = await response.json();
+      const response = await fetch("http://localhost:3000/api/stripe-session", {
+        method: "POST",
+        cache: "no-store",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(products),
+      });
 
-    if (data.session) {
-      stripe?.redirectToCheckout({ sessionId: data.session.id });
+      const data = await response.json();
+
+      if (data.session) {
+        stripe?.redirectToCheckout({ sessionId: data.session.id });
+      }
     }
   };
 

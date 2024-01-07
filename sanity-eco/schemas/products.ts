@@ -40,6 +40,11 @@ export default {
             title:"Category of product",
             type:"reference",
             to:[{type:"category"}]
+        },
+        {
+            name:"featured",
+            title:"Featured products",
+            type:"boolean",
         }
     ]
 }

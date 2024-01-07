@@ -4,16 +4,17 @@ import { createContext, useEffect, useContext, useState } from "react";
 
 export const MyContext = createContext();
 
-// const getLocalCart = () => {
-//   const oldCart: product[] = localStorage.getItem("cart") || [];
-//   return oldCart;
-// };
+const getLocalCart = () => {
+  const oldCart = JSON.parse(localStorage.getItem("sanity")) || [];
+  if (oldCart) return oldCart;
+};
 const CartContext = ({ children }: { children: any }) => {
-  const [cartProducts, setCartProducts] = useState<productDetail[]>([]);
+  const [cartProducts, setCartProducts] = useState(getLocalCart());
   const [open, setOpen] = useState(false);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    localStorage.setItem("sanity", JSON.stringify(cartProducts));
     setTotal(
       cartProducts.reduce((acc, item) => acc + item.quantity * item.Price, 0)
     );
@@ -41,10 +42,6 @@ const CartContext = ({ children }: { children: any }) => {
     setCartProducts(cartProducts.filter((pro) => pro.slug !== slug));
   };
 
-  const ClearCart = () => {
-    setCartProducts([]);
-  };
-
   const decreaseQuan = (pro: productDetail) => {
     setCartProducts([...cartProducts, { ...pro, quantity: pro.quantity - 1 }]);
   };
@@ -56,7 +53,6 @@ const CartContext = ({ children }: { children: any }) => {
         open,
         setOpen,
         decreaseQuan,
-        ClearCart,
         removeFrCart,
         cartProducts,
         total,

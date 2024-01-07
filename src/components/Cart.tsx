@@ -25,7 +25,7 @@ const Cart = () => {
         <div className="h-[95%]  flex justify-between flex-col">
           <div className="mt-8 flex-1 overflow-y-auto">
             <ul className="flex flex-col gap-3">
-              {cartProducts.map((product: productDetail) => (
+              {cartProducts?.map((product: productDetail) => (
                 <div className="flex gap-6" key={product._id}>
                   <div className="h-24 w-24 flex justify-between shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <Image

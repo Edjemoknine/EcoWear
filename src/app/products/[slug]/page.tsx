@@ -1,10 +1,15 @@
-import { productDetail } from "@/Type/type";
+import { product, productDetail } from "@/Type/type";
 import Gallery from "@/components/Gallery";
 import Purchase from "@/components/Purchase";
 import { Button } from "@/components/ui/button";
 import { client } from "@/lib/sanity";
+import { settings } from "@/lib/slideSettings";
 import { Star, Truck } from "lucide-react";
-
+import Image from "next/image";
+import Link from "next/link";
+import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 const productDetails = async (slug: string) => {
   const query = `*[_type == 'product' && Slug.current == '${slug}'][0]
 
@@ -21,8 +26,32 @@ const productDetails = async (slug: string) => {
   return product;
 };
 
+const GetSimilar = async (category: string) => {
+  const query = `*[_type == 'product' && category->name == '${category}']
+
+    {
+      _id,
+        name, 
+        Price,
+        "slug":Slug.current,
+        "imageUrl":image[0].asset->url,
+        "categoryName":category->name
+       
+    }`;
+  const products = await client.fetch(query);
+  return products;
+};
+
+export async function generateMatadata({ params }) {
+  console.log(params);
+  const product = await productDetails(params.slug);
+  console.log(product);
+  return { title: product.name, description: product.description };
+}
+
 const Product = async ({ params }: { params: { slug: string } }) => {
   const product: productDetail = await productDetails(params.slug);
+  const similar = await GetSimilar(product.categoryName);
 
   return (
     <div className="bg-white">
@@ -68,6 +97,39 @@ const Product = async ({ params }: { params: { slug: string } }) => {
             <p className="mt-12 text-base text-gray-500 tracking-wide">
               {product.description}
             </p>
+          </div>
+        </div>
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold">Product You Might Also Like !</h2>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 my-6 gap-6">
+            {similar?.slice(0, 4).map((product: product) => (
+              <div key={product._id} className="group relative">
+                <div className="aspect-square flex justify-center items-center w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
+                  <Image
+                    src={product.imageUrl}
+                    alt="product"
+                    width={300}
+                    height={300}
+                    className=" object-cover object-center"
+                  />
+                </div>
+                <div className="flex justify-between my-4">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <Link href={`/products/${product.slug}`}>
+                        {product.slug}
+                      </Link>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {product.categoryName}
+                    </p>
+                  </div>
+                  <p className="text-sm text-gray-900 font-medium">
+                    ${product.Price}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
