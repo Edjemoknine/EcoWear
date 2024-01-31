@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   title: "Store",
   description: "Best Products for The Best Clients",
 };
+type Pro = {
+  _id: string;
+  name: string;
+  Price: number;
+  slug: string;
+  imageUrl: string;
+  categoryName: string;
+};
 const GetProducts = async () => {
   const query = `*[_type == 'product' ]
       {
@@ -34,7 +42,7 @@ const page = async () => {
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-8">
         {/* <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-8"> */}
-        {products?.map((product) => (
+        {products?.map((product: Pro) => (
           <div key={product._id} className="group relative">
             <div className="aspect-square flex justify-center items-center w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
               <Image
