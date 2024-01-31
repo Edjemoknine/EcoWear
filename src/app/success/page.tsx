@@ -11,7 +11,7 @@ const Success = () => {
   const { setCartProducts } = useCart();
 
   useEffect(() => {
-    localStorage.clear();
+    window.localStorage.clear();
     setCartProducts([]);
     runConfetti();
   }, [setCartProducts]);

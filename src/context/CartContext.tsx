@@ -31,7 +31,7 @@ export const MyContext = createContext<Props>({
 });
 
 const getLocalCart = () => {
-  const oldCart = JSON.parse(localStorage.getItem("sanity")!) || [];
+  const oldCart = JSON.parse(window.localStorage.getItem("sanity")!) || [];
   if (oldCart) return oldCart;
 };
 const CartContext = ({ children }: { children: any }) => {
@@ -40,7 +40,7 @@ const CartContext = ({ children }: { children: any }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("sanity", JSON.stringify(cartProducts));
+    window.localStorage.setItem("sanity", JSON.stringify(cartProducts));
     setTotal(
       cartProducts.reduce(
         (acc: any, item: any) => acc + item.quantity * item.Price,
