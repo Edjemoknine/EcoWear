@@ -14,7 +14,7 @@ import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
 import { Button } from "./ui/button";
 
-const ProfileMenu = ({ user }) => {
+const ProfileMenu = ({ user }: { user: any }) => {
   return (
     <Menubar>
       <MenubarMenu>
