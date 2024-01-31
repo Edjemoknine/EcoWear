@@ -13,6 +13,9 @@ import { useCart } from "@/context/CartContext";
 import { urlFor } from "@/lib/sanity";
 import Image from "next/image";
 import Checkout from "./Checkout";
+type Props={
+  
+}
 const Cart = () => {
   const { cartProducts, open, setOpen, removeFrCart, total } = useCart();
   // console.log(process.env.NEXT_APP_STRIPE_KEY);

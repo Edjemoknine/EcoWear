@@ -12,7 +12,7 @@ const Success = () => {
     localStorage.clear();
     setCartProducts([]);
     runConfetti();
-  }, []);
+  }, [setCartProducts]);
 
   return (
     <div className="grid place-items-center  ">

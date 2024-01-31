@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 const Footer = () => {
   return (
     <footer className=" border-t mt-16 ">
@@ -34,8 +34,11 @@ const Footer = () => {
             <h3 className="font-semibold mb-6"> Download our fitness app </h3>
             <p> Stay fit. All day, every day. </p>
             <div className="flex justify-center my-10">
-              <div className="flex items-center border w-auto rounded-lg px-4 py-2 w-52 mx-2">
-                <img
+              <div className="flex items-center border  rounded-lg px-4 py-2 w-52 mx-2">
+                <Image
+                  alt="Image"
+                  width={16}
+                  height={16}
                   src="https://cdn-icons-png.flaticon.com/512/888/888857.png"
                   className="w-4 md:w-6"
                 />
@@ -43,8 +46,11 @@ const Footer = () => {
                   <p className="text-[10px] "> Google Play Store </p>
                 </div>
               </div>
-              <div className="flex items-center flex-col border w-auto rounded-lg px-4 py-2 w-44 mx-2">
-                <img
+              <div className="flex items-center flex-col border rounded-lg px-4 py-2 w-44 mx-2">
+                <Image
+                  alt="image"
+                  width={16}
+                  height={16}
                   src="https://cdn-icons-png.flaticon.com/512/888/888841.png"
                   className="w-4 md:w-6"
                 />
@@ -59,14 +65,14 @@ const Footer = () => {
 
         <div className="flex items-center justify-between">
           <p>&copy; Copyrights All Reserved By Moknine Inc. </p>
-          <div class="flex -mx-2">
+          <div className="flex -mx-2">
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="w-5 h-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,11 +83,11 @@ const Footer = () => {
 
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="Facebook"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="w-5 h-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,11 +98,11 @@ const Footer = () => {
 
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="Github"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="w-5 h-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

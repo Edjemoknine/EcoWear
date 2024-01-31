@@ -2,6 +2,12 @@
 const nextConfig = {
   images: {
     domains: ["cdn.sanity.io", "lh3.googleusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+      },
+    ],
   },
 };
 

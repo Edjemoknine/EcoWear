@@ -42,12 +42,11 @@ const GetSimilar = async (category: string) => {
   return products;
 };
 
-export async function generateMatadata({ params }) {
-  console.log(params);
-  const product = await productDetails(params.slug);
-  console.log(product);
-  return { title: product.name, description: product.description };
-}
+// export async function generateMatadata({ params }) {
+//   const product = await productDetails(params.slug);
+//   console.log(product);
+//   return { title: product.name, description: product.description };
+// }
 
 const Product = async ({ params }: { params: { slug: string } }) => {
   const product: productDetail = await productDetails(params.slug);
