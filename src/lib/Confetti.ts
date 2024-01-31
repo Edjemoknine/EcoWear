@@ -9,7 +9,7 @@ function randomInRange(min:number, max:number) {
   return Math.random() * (max - min) + min;
 }
 
-var interval = setInterval(function() {
+var interval:any = setInterval(function() {
   var timeLeft = animationEnd - Date.now();
 
   if (timeLeft <= 0) {
