@@ -1,11 +1,37 @@
 "use client";
 import { productDetail } from "@/Type/type";
-import { createContext, useEffect, useContext, useState } from "react";
+import {
+  createContext,
+  useEffect,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-export const MyContext = createContext();
+export type Props = {
+  addToCart: (pro: productDetail) => void;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  decreaseQuan: (pro: productDetail) => void;
+  removeFrCart: (slug: string) => void;
+  cartProducts: any;
+  setCartProducts: Dispatch<SetStateAction<[]>>;
+  total: number;
+};
+export const MyContext = createContext<Props>({
+  addToCart: (pro: productDetail) => {},
+  open: false,
+  setOpen: () => {},
+  decreaseQuan: () => {},
+  removeFrCart: () => {},
+  cartProducts: [],
+  setCartProducts: () => {},
+  total: 0,
+});
 
 const getLocalCart = () => {
-  const oldCart = JSON.parse(localStorage.getItem("sanity")) || [];
+  const oldCart = JSON.parse(localStorage.getItem("sanity")!) || [];
   if (oldCart) return oldCart;
 };
 const CartContext = ({ children }: { children: any }) => {
@@ -16,12 +42,17 @@ const CartContext = ({ children }: { children: any }) => {
   useEffect(() => {
     localStorage.setItem("sanity", JSON.stringify(cartProducts));
     setTotal(
-      cartProducts.reduce((acc, item) => acc + item.quantity * item.Price, 0)
+      cartProducts.reduce(
+        (acc: any, item: any) => acc + item.quantity * item.Price,
+        0
+      )
     );
   }, [cartProducts]);
 
   const addToCart = (pro: productDetail) => {
-    let check = cartProducts.some((product) => product.slug === pro.slug);
+    let check: boolean = cartProducts.some(
+      (product: any) => product.slug === pro.slug
+    );
 
     if (check === true) {
       setCartProducts([
@@ -39,7 +70,9 @@ const CartContext = ({ children }: { children: any }) => {
   };
 
   const removeFrCart = (slug: string) => {
-    setCartProducts(cartProducts.filter((pro) => pro.slug !== slug));
+    setCartProducts(
+      cartProducts.filter((pro: productDetail) => pro.slug !== slug)
+    );
   };
 
   const decreaseQuan = (pro: productDetail) => {
@@ -55,6 +88,7 @@ const CartContext = ({ children }: { children: any }) => {
         decreaseQuan,
         removeFrCart,
         cartProducts,
+        setCartProducts,
         total,
       }}
     >

@@ -4,8 +4,9 @@ import getStripe from "@/lib/stripe";
 import { Button } from "./ui/button";
 import { redirect, useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { productDetail } from "@/Type/type";
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products }: { products: productDetail[] }) => {
   const { isAuthenticated } = useKindeBrowserClient();
   const router = useRouter();
   const handleCheckout = async () => {

@@ -25,7 +25,7 @@ const Banner = () => {
             height={500}
           />
           <div className="text-right absolute right-6 bottom-3">
-            <h3 className="font-semibold -mb-6 md:mb-0 text-primary text-lg mb-3 hidden sm:block">
+            <h3 className="font-semibold -mb-6 md:mb-0 text-primary text-lg hidden sm:block">
               50% Off
             </h3>
             <p className="hidden md:flex text-gray-500 max-w-[250px]">

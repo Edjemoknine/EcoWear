@@ -1,13 +1,15 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { runConfetti } from "@/lib/Confetti";
-import { ShoppingBag, ShoppingBasket } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 
 const Success = () => {
   const { setCartProducts } = useCart();
+
   useEffect(() => {
     localStorage.clear();
     setCartProducts([]);

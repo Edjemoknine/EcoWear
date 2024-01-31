@@ -2,8 +2,9 @@
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
 import Checkout from "./Checkout";
+import { productDetail } from "@/Type/type";
 
-const Purchase = ({ product }) => {
+const Purchase = ({ product }: { product: productDetail }) => {
   const { addToCart } = useCart();
 
   return (
